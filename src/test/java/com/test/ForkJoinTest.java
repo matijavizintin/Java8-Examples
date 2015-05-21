@@ -13,7 +13,6 @@ import java.util.concurrent.ForkJoinPool;
 public class ForkJoinTest {
     private static final Integer NO_OF_VCORES = 8;          // i7-4980HQ
 
-
     /**
      * Simple test of ForkJoinPool
      */
