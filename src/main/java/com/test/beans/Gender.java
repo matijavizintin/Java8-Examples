@@ -1,4 +1,4 @@
-package com.test;
+package com.test.beans;
 
 /**
  * Created by Matija Vižintin

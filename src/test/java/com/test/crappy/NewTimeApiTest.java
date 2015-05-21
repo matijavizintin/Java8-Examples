@@ -1,4 +1,4 @@
-package com.test;
+package com.test.crappy;
 
 import org.junit.After;
 import org.junit.Before;

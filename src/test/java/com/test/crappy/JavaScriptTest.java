@@ -1,6 +1,5 @@
-package com.test;
+package com.test.crappy;
 
-import netscape.javascript.JSException;
 import org.junit.Test;
 
 import javax.script.ScriptEngine;

@@ -1,4 +1,4 @@
-package com.test;
+package com.test.crappy;
 
 import com.test.hierarchy.Inner;
 import com.test.hierarchy.InnerInner;

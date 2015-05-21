@@ -1,5 +1,8 @@
-package com.test;
+package com.test.undocumented;
 
+import com.test.beans.Person;
+import com.test.crappy.Streams2Test;
+import com.test.crappy.Streams3Test;
 import com.test.flatmap.Many;
 import com.test.flatmap.One;
 import org.junit.Test;
@@ -17,7 +20,7 @@ import java.util.stream.IntStream;
  * Date: 16. 05. 2015
  * Time: 10.11
  */
-public class Streams3Test {
+public class StreamsTest {
 
     @Test
     public void collectors() {
@@ -26,7 +29,7 @@ public class Streams3Test {
         Set<Integer> set = IntStream.range(1, 50).filter(value -> value < 10).mapToObj(v -> v).collect(Collectors.toSet());
         System.out.println("Collected as set: " + set.getClass());
 
-        List<Person> persons = new StreamsTest().generatePersons(100);
+        List<Person> persons = new Streams3Test().generatePersons(100);
         Map<Integer, List<Person>> mapped = persons.stream().collect(Collectors.groupingBy(Person::getAge));
 
         mapped.forEach((age, p) -> System.out.format("Age %d, people %s\n", age, p));
@@ -34,7 +37,7 @@ public class Streams3Test {
 
     @Test
     public void mathFunctions() {
-        List<Person> persons = new StreamsTest().generatePersons(100);
+        List<Person> persons = new Streams3Test().generatePersons(100);
 
         Double average = persons.stream().collect(Collectors.averagingInt(Person::getAge));
         System.out.format("Average: %f\n", average);
@@ -48,7 +51,7 @@ public class Streams3Test {
 
     @Test
     public void stringJoiners() {
-        List<Person> persons = new StreamsTest().generatePersons(5);
+        List<Person> persons = new Streams3Test().generatePersons(5);
 
         String s = persons.stream()
                 .filter(person -> person.getAge() > 10)
@@ -63,7 +66,7 @@ public class Streams3Test {
                 () -> new StringJoiner(" | "), (stringJoiner, person) -> stringJoiner.add(person.getName().toUpperCase()), StringJoiner::merge,
                 StringJoiner::toString);
 
-        List<Person> persons = new StreamsTest().generatePersons(5);
+        List<Person> persons = new Streams3Test().generatePersons(5);
         String names = persons.stream().collect(collector);
         System.out.println(names);
     }

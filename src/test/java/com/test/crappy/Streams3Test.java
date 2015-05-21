@@ -1,9 +1,11 @@
-package com.test;
+package com.test.crappy;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
+import com.test.beans.Gender;
+import com.test.beans.Person;
 import org.junit.Test;
 
 import java.io.BufferedWriter;
@@ -22,7 +24,7 @@ import java.util.stream.Stream;
  * Date: 05. 05. 2015
  * Time: 14.43
  */
-public class StreamsTest {
+public class Streams3Test {
 
     @Test public void test1() {
         List<Person> input = generatePersons(100);

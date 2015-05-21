@@ -1,4 +1,4 @@
-package com.test;
+package com.test.crappy;
 
 import com.google.common.base.Stopwatch;
 import org.junit.Test;

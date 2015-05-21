@@ -1,4 +1,4 @@
-package com.test;
+package com.test.crappy;
 
 import com.test.typeinference.Value;
 import org.junit.Test;

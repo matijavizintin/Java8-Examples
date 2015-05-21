@@ -1,5 +1,7 @@
-package com.test;
+package com.test.undocumented;
 
+import com.test.beans.Person;
+import com.test.crappy.Streams3Test;
 import com.test.generators.DataGenerator;
 import org.junit.Test;
 
@@ -12,7 +14,8 @@ import java.util.List;
  */
 public class ParallelStreamsTest {
 
-    @Test public void parallel() {
+    @Test
+    public void parallel() {
         List<String> list = DataGenerator.strings(5, 100);
         list.parallelStream().filter(
                 s -> {
@@ -25,7 +28,8 @@ public class ParallelStreamsTest {
                 }).forEach(s -> System.out.format("ForEach: input: %s, thread: %s\n", s, Thread.currentThread().getName()));
     }
 
-    @Test public void parallelSort() {
+    @Test
+    public void parallelSort() {
         List<String> list = DataGenerator.strings(5, 10);
         list.parallelStream().filter(
                 s -> {
@@ -45,8 +49,9 @@ public class ParallelStreamsTest {
                 });
     }
 
-    @Test public void parallelReduce() {
-        List<Person> people = new StreamsTest().generatePersons(10);
+    @Test
+    public void parallelReduce() {
+        List<Person> people = new Streams3Test().generatePersons(10);
         people.parallelStream().reduce(
                 0, (integer, person) -> {
                     System.out.format("Accumulator %s, [%s]\n", integer, Thread.currentThread().getName());

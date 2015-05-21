@@ -1,4 +1,4 @@
-package com.test;
+package com.test.crappy;
 
 import com.test.defaultmethods.DefaultInterface;
 import com.test.defaultmethods.DefaultableInterface;

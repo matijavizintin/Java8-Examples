@@ -4,6 +4,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Created by Matija Vižintin
@@ -19,5 +21,9 @@ public class DataGenerator {
             strings.add(RandomStringUtils.randomAlphabetic(stringSize));
         }
         return strings;
+    }
+
+    public static List<Integer> integers(int size) {
+        return IntStream.range(1, 10).boxed().collect(Collectors.toList());
     }
 }

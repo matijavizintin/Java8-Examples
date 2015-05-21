@@ -1,5 +1,6 @@
 package com.test;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.concurrent.ForkJoinPool;
@@ -10,10 +11,18 @@ import java.util.concurrent.ForkJoinPool;
  * Time: 13.57
  */
 public class ForkJoinTest {
+    private static final Integer NO_OF_VCORES = 8;          // i7-4980HQ
 
+
+    /**
+     * Simple test of ForkJoinPool
+     */
     @Test
     public void poolTest() {
+        // initialize a pool and print no of available threads
         ForkJoinPool pool = ForkJoinPool.commonPool();
-        System.out.println("No of threads: " + pool.getParallelism());      // expected: no of (virtual) cores - 1
+        System.out.println("No of threads: " + pool.getParallelism());
+
+        Assert.assertEquals(NO_OF_VCORES - 1, pool.getParallelism());            // expected: no of (virtual) cores - 1
     }
 }
