@@ -10,6 +10,6 @@ public interface AnnotatedInterface {
     void implementMe();
 
     default void implemented() {
-
+        System.out.println("Method implemented on interface!");
     }
 }

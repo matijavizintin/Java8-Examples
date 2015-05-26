@@ -1,4 +1,4 @@
-package com.test.undocumented;
+package com.test.streams;
 
 import com.test.beans.Person;
 import com.test.crappy.Streams3Test;

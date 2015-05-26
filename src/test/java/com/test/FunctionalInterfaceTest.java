@@ -31,4 +31,15 @@ public class FunctionalInterfaceTest {
     public void usefulExample() {
         new Thread(() -> System.out.println("Say hello in new thread named: " + Thread.currentThread().getName())).start();
     }
+
+    /**
+     * Invoke default method implemented on interface.
+     */
+    @Test
+    public void defaultMethodExample() {
+        AnnotatedInterface ai = () -> {};   // just instantiate
+
+        // invoke default method on interface
+        ai.implemented();
+    }
 }

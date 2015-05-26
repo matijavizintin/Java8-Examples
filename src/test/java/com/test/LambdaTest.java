@@ -1,6 +1,8 @@
 package com.test;
 
+import com.test.functional.Adder;
 import com.test.generators.DataGenerator;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -34,5 +36,51 @@ public class LambdaTest {
 
         // method reference
         Collections.sort(list, Integer::compareTo);
+    }
+
+    /**
+     * Test shows that variables used in lambdas doesn't have to be explicitly final but have to be effectively final.
+     *
+     * If the commented line of code is uncommented, variable base won't be final any more and code won't compile.
+     */
+    @Test
+    public void variableScopes() {
+        int base = 10;          // base doesn't have to be explicitly final
+        Adder adder = increment -> base + increment;
+
+        //             NOTE: if uncommented code won't compile
+        //base = 15;
+
+        // add
+        int increment = 5;
+        int result = adder.add(increment);
+        System.out.printf("%d + %s = %d", base, increment, result);
+    }
+
+    static int staticGlobalInt;
+    int globalInt;
+    /**
+     * Method shows that with global variables we have read and write access.
+     */
+    @Test
+    public void globalVariablesScope() {
+        Adder adder = increment -> {
+            staticGlobalInt += increment;
+            globalInt += increment;
+            return staticGlobalInt;
+        };
+
+        // set global variable
+        staticGlobalInt = 10;
+        globalInt = 10;
+
+        // add
+        int increment = 5;
+        int result = adder.add(increment);
+        System.out.printf("StaticGlobalInt: %d, GlobalInt: %d, Result: %d", staticGlobalInt, globalInt, result);
+
+        // assert
+        Assert.assertEquals("Values are expected to be equals.", result, staticGlobalInt);
+        Assert.assertEquals("Values are expected to be equals.", result, globalInt);
     }
 }
