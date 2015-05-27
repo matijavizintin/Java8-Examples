@@ -29,6 +29,4 @@ public class Many {
     public void setOne(One one) {
         this.one = one;
     }
-
-
 }

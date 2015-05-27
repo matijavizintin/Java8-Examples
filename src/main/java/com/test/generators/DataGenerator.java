@@ -2,6 +2,8 @@ package com.test.generators;
 
 import com.test.beans.Gender;
 import com.test.beans.Person;
+import com.test.flatmap.Many;
+import com.test.flatmap.One;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 
@@ -47,6 +49,29 @@ public class DataGenerator {
                 people.add(new Person(names.get(i), Math.random() > 0.5 ? Gender.MALE : Gender.FEMALE, (int)(Math.random() * 100)));
             }
             return people;
+        } catch (URISyntaxException | IOException e) {
+            logger.error("Can't read names from file.", e);
+            throw new RuntimeException("Check logs.");
+        }
+    }
+
+    public static List<One> ones(int onesSize, int maniesSize) {
+        try {
+            Path path = new File(DataGenerator.class.getClassLoader().getResource("names.txt").toURI()).toPath();
+            List<String> names = Files.readAllLines(path);
+
+            // generate ones with manies
+            int globalNamesCounter = 0;
+            List<One> ones = new ArrayList<>();
+            for (int i = 0; i < onesSize; i++) {
+                One one = new One(names.get(globalNamesCounter++));
+                for (int j = 0; j < maniesSize; j++) {
+                    Many many = new Many(names.get(globalNamesCounter++), one);
+                    one.getManies().add(many);
+                }
+                ones.add(one);
+            }
+            return ones;
         } catch (URISyntaxException | IOException e) {
             logger.error("Can't read names from file.", e);
             throw new RuntimeException("Check logs.");
