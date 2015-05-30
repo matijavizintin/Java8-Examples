@@ -3,6 +3,7 @@ package com.test.streams;
 import com.google.common.collect.Ordering;
 import com.test.beans.Person;
 import com.test.generators.DataGenerator;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  * Date: 16. 05. 2015
  * Time: 12.37
  */
-public class ReduceTest {
+public class ReduceTest extends LoggingTimedTest {
 
     /**
      * Test reduces the stream to one person using accumulator BinaryOperation. The condition reduces to the oldest person.

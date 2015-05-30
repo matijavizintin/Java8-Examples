@@ -2,6 +2,7 @@ package com.test.streams;
 
 import com.test.beans.Person;
 import com.test.generators.DataGenerator;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,13 +19,13 @@ import java.util.stream.IntStream;
  * Date: 16. 05. 2015
  * Time: 10.11
  */
-public class CollectorsTest {
+public class CollectorsTest extends LoggingTimedTest {
 
     /**
      * Simple collectors test. Streams are collected as list or as set.
      */
     @Test
-    public void sipleCollectors() {
+    public void simpleCollectors() {
         // make some operations on the stream and collect with an integrated collector
         List<Integer> list = IntStream.range(1, 50).filter(value -> value < 10).mapToObj(v ->  v).collect(Collectors.toList());
         System.out.println("Collected as list: " + list.getClass());
@@ -66,7 +67,7 @@ public class CollectorsTest {
         Long counter = persons.stream().collect(Collectors.counting());
         System.out.printf("Count: %d\n", counter);
 
-        // sum - for example the same can be done using mapToIn(Person::getAge) and then calling sum
+        // sum - for example the same can be done using mapToInt(Person::getAge) and then calling sum
         Integer sum = persons.stream().collect(Collectors.summingInt(Person::getAge));
         System.out.printf("Sum: %d\n", sum);
         Integer sum2 = persons.stream().mapToInt(Person::getAge).sum();
