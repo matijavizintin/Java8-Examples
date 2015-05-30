@@ -5,6 +5,7 @@ import com.test.beans.Person;
 import com.test.functional.Converter;
 import com.test.functional.ExtendedPersonFactory;
 import com.test.functional.PersonFactory;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Test;
 
 /**
@@ -12,7 +13,7 @@ import org.junit.Test;
  * Date: 21. 05. 2015
  * Time: 20.42
  */
-public class MethodReferencesTest {
+public class MethodReferencesTest extends LoggingTimedTest {
 
     /**
      * Test shows how code can be simplified from pre-Java8 interface implementation to single-row method reference.

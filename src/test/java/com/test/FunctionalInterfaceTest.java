@@ -2,6 +2,7 @@ package com.test;
 
 import com.test.functional.AnnotatedInterface;
 import com.test.functional.UnAnnotatedInterface;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Test;
 
 /**
@@ -9,7 +10,7 @@ import org.junit.Test;
  * Date: 21. 05. 2015
  * Time: 20.23
  */
-public class FunctionalInterfaceTest {
+public class FunctionalInterfaceTest extends LoggingTimedTest {
 
     /**
      * Testing functional interfaces, one annotated as @FunctionalInterface, the other not. Both works the same way, the difference is that if we want

@@ -1,5 +1,6 @@
 package com.test;
 
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,8 +11,8 @@ import java.util.concurrent.ForkJoinPool;
  * Date: 16. 05. 2015
  * Time: 13.57
  */
-public class ForkJoinTest {
-    private static final Integer NO_OF_VCORES = 8;          // i7-4980HQ
+public class ForkJoinTest extends LoggingTimedTest {
+    public static final int NO_OF_VCORES = 8;          // i7-4980HQ
 
     /**
      * Simple test of ForkJoinPool

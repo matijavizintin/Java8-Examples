@@ -3,6 +3,7 @@ package com.test;
 import com.test.beans.ExtendedPerson;
 import com.test.beans.Person;
 import com.test.generators.DataGenerator;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ import java.util.function.Supplier;
  * Date: 22. 05. 2015
  * Time: 15.26
  */
-public class BuiltInFunctionalTest {
+public class BuiltInFunctionalTest extends LoggingTimedTest {
 
     /**
      * Test demonstrates usage of predicates. More or less the same as guava.

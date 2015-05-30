@@ -2,6 +2,7 @@ package com.test;
 
 import com.test.functional.Adder;
 import com.test.generators.DataGenerator;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * Date: 21. 05. 2015
  * Time: 20.08
  */
-public class LambdaTest {
+public class LambdaTest extends LoggingTimedTest {
 
     /**
      * Simple test that shows lambda "evolution". It shows how code can be shortened (and made more elegant) using lambda expressions.
