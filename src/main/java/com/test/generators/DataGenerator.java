@@ -14,6 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -35,7 +38,24 @@ public class DataGenerator {
     }
 
     public static List<Integer> integers(int size) {
-        return IntStream.range(1, 10).boxed().collect(Collectors.toList());
+        return IntStream.range(1, size).boxed().collect(Collectors.toList());
+    }
+
+    public static List<Double> randomDoubles(int size) {
+        return IntStream.range(0, size).boxed().map(operand -> ThreadLocalRandom.current().nextDouble()).collect(Collectors.toList());
+    }
+
+    public static Map<Integer, String> mapNamesToIntegers(int size) {
+        try {
+            Path path = new File(DataGenerator.class.getClassLoader().getResource("names.txt").toURI()).toPath();
+            List<String> names = Files.readAllLines(path);
+            return IntStream.range(0, size).boxed().collect(
+                    Collectors.groupingBy(
+                            Function.<Integer>identity(), Collectors.reducing("", names::get, (s, s2) -> s2)));
+        } catch (URISyntaxException | IOException e) {
+            logger.error("Can't read names from file.", e);
+            throw new RuntimeException("Check logs.");
+        }
     }
 
     public static List<Person> people(int size) {
