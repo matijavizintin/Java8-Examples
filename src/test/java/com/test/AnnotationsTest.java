@@ -4,6 +4,7 @@ import com.test.annotations.AnnotatedClass;
 import com.test.annotations.Hint;
 import com.test.annotations.Hints;
 import com.test.annotations.TypeUseAnnotation;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ import java.util.Map;
  * Date: 31. 05. 2015
  * Time: 19.46
  */
-public class AnnotationsTest {
+public class AnnotationsTest extends LoggingTimedTest {
 
     /**
      * This test demonstrates the usage of repeatable annotations that are now possible with JDK 8.

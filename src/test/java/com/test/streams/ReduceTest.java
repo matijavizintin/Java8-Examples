@@ -1,6 +1,5 @@
 package com.test.streams;
 
-import com.google.common.collect.Ordering;
 import com.test.beans.Person;
 import com.test.generators.DataGenerator;
 import com.test.timed.LoggingTimedTest;
@@ -30,7 +29,7 @@ public class ReduceTest extends LoggingTimedTest {
         System.out.println("Oldest = " + oldest);
 
         // assert
-        Integer maxAge = Ordering.from((Person o1, Person o2) -> o1.getAge().compareTo(o2.getAge())).max(people).getAge();
+        Integer maxAge = people.stream().mapToInt(Person::getAge).max().getAsInt();
         Assert.assertEquals(maxAge, oldest.getAge());
     }
 
@@ -48,10 +47,10 @@ public class ReduceTest extends LoggingTimedTest {
                     p.setAge(p.getAge() + p2.getAge());
                     return p;
                 });
-        System.out.format("Aggregated age: %d", identity.getAge());
+        System.out.format("Aggregated age: %d\n", identity.getAge());
 
         // assert
-        Integer totalAge = people.stream().map(Person::getAge).collect(Collectors.summingInt(value -> value));
+        Integer totalAge = people.stream().mapToInt(Person::getAge).sum();
         Assert.assertEquals(totalAge, identity.getAge());
     }
 

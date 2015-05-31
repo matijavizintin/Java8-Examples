@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -90,5 +91,28 @@ public class ParallelStreamsTest extends LoggingTimedTest {
 
         // assert
         Assert.assertEquals(ForkJoinTest.NO_OF_VCORES, executingThreads.size());        // executed on all available threads
+    }
+
+    /**
+     * This test shows how stream can be created as sequential and then transformed to parallel.ck to sequential.
+     *
+     * NOTE: don't forget that staring new threads is costly.
+     */
+    @Test
+    public void sequentialToParallel() {
+        executingThreads.clear();
+        List<Integer> integers = DataGenerator.integers(1000 * 1000)     // 1M of data
+                .stream()               // sequential stream
+                .filter(
+                        integer -> {
+                            executingThreads.add(Thread.currentThread().getName());
+                            return true;
+                        })
+                .map(Function.<Integer>identity())
+                .parallel()             // transformed in parallel stream
+                .collect(Collectors.toList());
+
+        // assert
+        Assert.assertEquals(ForkJoinTest.NO_OF_VCORES, executingThreads.size());        // filter was executed on all available threads
     }
 }
