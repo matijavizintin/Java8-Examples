@@ -1,5 +1,6 @@
 package com.test.generators;
 
+import com.google.common.base.Preconditions;
 import com.test.beans.Gender;
 import com.test.beans.Person;
 import com.test.flatmap.Many;
@@ -7,9 +8,11 @@ import com.test.flatmap.One;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -99,6 +102,17 @@ public class DataGenerator {
     }
 
     public static void main(String[] args) {
-        //DataGenerator.class.getClassLoader().getResource("names.txt");
+        URL url = DataGenerator.class.getClassLoader().getResource("names.txt");
+        Preconditions.checkNotNull(url);
+        File file = new File(url.getPath());
+
+        try (BufferedReader br = Files.newBufferedReader(file.toPath())) {
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            // pass
+        }
     }
 }
