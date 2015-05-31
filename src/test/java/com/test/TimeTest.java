@@ -1,5 +1,6 @@
 package com.test;
 
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ import java.util.TimeZone;
  * Date: 31. 05. 2015
  * Time: 17.10
  */
-public class TimeTest {
+public class TimeTest extends LoggingTimedTest {
 
     /**
      * Simple clock test. This test should execute in less than 1ms.
