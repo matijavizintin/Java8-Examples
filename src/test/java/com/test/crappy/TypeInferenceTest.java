@@ -8,7 +8,7 @@ import org.junit.Test;
  * Date: 09. 05. 2015
  * Time: 09.47
  */
-public class TypeInferenceTest {
+public class TypeInferenceTest {        // todo: fixit
 
     @Test
     public void test1() {

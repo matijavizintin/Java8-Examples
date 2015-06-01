@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  * Date: 08. 05. 2015
  * Time: 14.13
  */
-public class DefaultMethodTest {
+public class DefaultMethodTest {        // TODO: fix
 
     @Test
     public void test1() throws Exception {

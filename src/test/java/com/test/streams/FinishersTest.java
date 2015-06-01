@@ -1,6 +1,7 @@
 package com.test.streams;
 
 import com.test.generators.DataGenerator;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import java.util.stream.Stream;
  * Date: 01. 06. 2015
  * Time: 13.49
  */
-public class FinishersTest {
+public class FinishersTest extends LoggingTimedTest {
 
     /**
      * Test shows how to get the first element in the stream. There is also a method {@link Stream#findAny()} that picks one element from the stream.
