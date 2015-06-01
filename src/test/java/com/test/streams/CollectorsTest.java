@@ -6,6 +6,10 @@ import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,8 +33,15 @@ public class CollectorsTest extends LoggingTimedTest {
         // make some operations on the stream and collect with an integrated collector
         List<Integer> list = IntStream.range(1, 50).filter(value -> value < 10).mapToObj(v ->  v).collect(Collectors.toList());
         System.out.println("Collected as list: " + list.getClass());
+        Assert.assertEquals(ArrayList.class, list.getClass());
+
         Set<Integer> set = IntStream.range(1, 50).filter(value -> value < 10).mapToObj(v -> v).collect(Collectors.toSet());
         System.out.println("Collected as set: " + set.getClass());
+        Assert.assertEquals(HashSet.class, set.getClass());
+
+        Map<String, Integer> map = DataGenerator.people(10).stream().collect(Collectors.toMap(Person::getName, Person::getAge));
+        System.out.println("Collected as map: " + map.getClass());
+        Assert.assertEquals(HashMap.class, map.getClass());
     }
 
     /**
@@ -74,6 +85,15 @@ public class CollectorsTest extends LoggingTimedTest {
 
         // assert
         Assert.assertEquals(sum, sum2);
+
+        // statistics example
+        IntSummaryStatistics statistics = persons.stream().collect(Collectors.summarizingInt(Person::getAge));
+        double statisticsAverage = statistics.getAverage();
+        long statisticsCount = statistics.getCount();
+
+        // assert statistics
+        Assert.assertEquals(statisticsAverage, average.doubleValue(), Math.pow(10, -9));
+        Assert.assertEquals(statisticsCount, counter.longValue());
     }
 
     /**
@@ -93,12 +113,16 @@ public class CollectorsTest extends LoggingTimedTest {
 
     /**
      * Test shows a joiner function implemented as collector. Collector instances can be then reused in multiple streams.
+     *
+     * Implementing a collector look difficult with all the functions and stuff. Fortunately, most of them are already available in the JDK.
      */
     @Test
     public void customCollector() {
         Collector<Person, StringJoiner, String> collector = Collector.of(
-                () -> new StringJoiner(" | "), (stringJoiner, person) -> stringJoiner.add(person.getName().toUpperCase()), StringJoiner::merge,
-                StringJoiner::toString);
+                () -> new StringJoiner(" | "),                                                  // supplier
+                (stringJoiner, person) -> stringJoiner.add(person.getName().toUpperCase()),     // accumulator
+                StringJoiner::merge,                                                            // combiner
+                StringJoiner::toString);                                                        // finisher
 
         // join names and print them
         List<Person> persons = DataGenerator.people(5);

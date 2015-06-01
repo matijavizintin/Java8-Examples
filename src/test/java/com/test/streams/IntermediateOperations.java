@@ -55,22 +55,4 @@ public class IntermediateOperations extends LoggingTimedTest {
             Assert.assertTrue(StringUtils.isAllUpperCase(string));
         }
     }
-
-    /**
-     * This is a simple of *Match operations in streams.
-     */
-    @Test
-    public void match() {
-        // all match
-        boolean allMatch = DataGenerator.integers(10).stream().allMatch(integer -> integer > 5);
-        Assert.assertFalse(allMatch);
-
-        // any match
-        boolean anyMatch = DataGenerator.integers(10).stream().anyMatch(integer -> integer > 5);
-        Assert.assertTrue(anyMatch);
-
-        // none match
-        boolean noneMatch = DataGenerator.integers(10).stream().noneMatch(integer -> integer > 5);
-        Assert.assertFalse(noneMatch);
-    }
 }
