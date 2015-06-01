@@ -42,7 +42,7 @@ public class StreamsTest extends LoggingTimedTest {
                 .boxed()                                // transform from primitive to object
                 .mapToDouble(Integer::doubleValue)      // transform to double
                 .forEach(response::add);                // put into result
-        Assert.assertEquals(0, response.size());
+        Assert.assertEquals(4, response.size());
     }
 
     /**
@@ -104,14 +104,14 @@ public class StreamsTest extends LoggingTimedTest {
     /**
      * This example show that stream is not executed until the terminal operation is called.
      */
-    private int executionCounter;
+    private int executionCounter = 0;
     @Test
     public void streamNotExecutedTillTerminalOperation() {
         int inputSize = 10;
         List<Person> people = DataGenerator.people(inputSize);
 
         // crate stream
-        Stream<Person> stream = people.parallelStream().map(person -> {executionCounter++; return person;});
+        Stream<Person> stream = people.stream().map(person -> {executionCounter++; return person;});
 
         // assert
         Assert.assertEquals(0, executionCounter);       // stream's operation haven't executed
