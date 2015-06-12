@@ -1,6 +1,7 @@
-package com.test;
+package com.test.collections;
 
 import com.google.common.collect.Sets;
+import com.test.concurrency.ForkJoinTest;
 import com.test.generators.DataGenerator;
 import org.junit.Assert;
 import org.junit.Test;

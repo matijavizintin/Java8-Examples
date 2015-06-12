@@ -1,7 +1,7 @@
 package com.test.streams;
 
 import com.google.common.collect.Sets;
-import com.test.ForkJoinTest;
+import com.test.concurrency.ForkJoinTest;
 import com.test.generators.DataGenerator;
 import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;

@@ -1,4 +1,4 @@
-package com.test;
+package com.test.collections;
 
 import com.test.beans.ExtendedPerson;
 import com.test.beans.Person;

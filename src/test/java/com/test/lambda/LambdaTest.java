@@ -1,4 +1,4 @@
-package com.test;
+package com.test.lambda;
 
 import com.test.functional.Adder;
 import com.test.generators.DataGenerator;
@@ -49,7 +49,7 @@ public class LambdaTest extends LoggingTimedTest {
         int base = 10;          // base doesn't have to be explicitly final
         Adder adder = increment -> base + increment;
 
-        //             NOTE: if uncommented code won't compile
+        // but it has to be effectively final           NOTE: if uncommented, code won't compile
         //base = 15;
 
         // add

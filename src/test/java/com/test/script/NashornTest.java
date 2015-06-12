@@ -1,4 +1,4 @@
-package com.test;
+package com.test.script;
 
 /**
  * Created by Matija Vižintin

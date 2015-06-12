@@ -1,4 +1,4 @@
-package com.test;
+package com.test.script;
 
 import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;

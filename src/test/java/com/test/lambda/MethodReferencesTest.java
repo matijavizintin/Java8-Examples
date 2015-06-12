@@ -1,4 +1,4 @@
-package com.test;
+package com.test.lambda;
 
 import com.test.beans.ExtendedPerson;
 import com.test.beans.Person;

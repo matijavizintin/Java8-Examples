@@ -1,4 +1,4 @@
-package com.test;
+package com.test.collections;
 
 import com.test.generators.DataGenerator;
 import com.test.timed.LoggingTimedTest;
