@@ -36,7 +36,7 @@ public class MethodReferencesTest extends LoggingTimedTest {
         // run converter
         String input = "123";
         Integer convertedValue = converter2.convert(input);
-        System.out.printf("Input: %s, Converted: %d", input, convertedValue);
+        System.out.printf("Input: %s, Converted: %d\n", input, convertedValue);
     }
 
     /**
@@ -53,7 +53,7 @@ public class MethodReferencesTest extends LoggingTimedTest {
         // run converter
         String input = "abc";
         String output = secondConverter.convert(input);
-        System.out.printf("Input: %s, Output: %s", input, output);
+        System.out.printf("Input: %s, Output: %s\n", input, output);
     }
 
     /**

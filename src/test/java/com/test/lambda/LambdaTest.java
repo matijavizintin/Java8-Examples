@@ -55,7 +55,7 @@ public class LambdaTest extends LoggingTimedTest {
         // add
         int increment = 5;
         int result = adder.add(increment);
-        System.out.printf("%d + %s = %d", base, increment, result);
+        System.out.printf("%d + %s = %d\n", base, increment, result);
     }
 
     static int staticGlobalInt;
@@ -78,7 +78,7 @@ public class LambdaTest extends LoggingTimedTest {
         // add
         int increment = 5;
         int result = adder.add(increment);
-        System.out.printf("StaticGlobalInt: %d, GlobalInt: %d, Result: %d", staticGlobalInt, globalInt, result);
+        System.out.printf("StaticGlobalInt: %d, GlobalInt: %d, Result: %d\n", staticGlobalInt, globalInt, result);
 
         // assert
         Assert.assertEquals("Values are expected to be equals.", result, staticGlobalInt);

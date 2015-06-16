@@ -96,6 +96,8 @@ public class ParallelStreamsTest extends LoggingTimedTest {
     /**
      * This test shows how stream can be created as sequential and then transformed to parallel.ck to sequential.
      *
+     * TODO: error fix!!
+     *
      * NOTE: don't forget that staring new threads is costly.
      */
     @Test

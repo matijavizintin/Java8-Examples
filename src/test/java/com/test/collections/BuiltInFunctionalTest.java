@@ -69,6 +69,7 @@ public class BuiltInFunctionalTest extends LoggingTimedTest {
         // function in practice
         Function<Integer, String> toStringFunction = Object::toString;
         DataGenerator.integers(10).stream().map(toStringFunction).forEach(s -> System.out.printf("%s ", s));
+        System.out.println();
     }
 
     /**
@@ -99,6 +100,7 @@ public class BuiltInFunctionalTest extends LoggingTimedTest {
         // consumer in practice
         Consumer<Integer> integerConsumer = System.out::print;
         DataGenerator.integers(10).stream().forEach(integerConsumer);
+        System.out.println();
     }
 
     /**

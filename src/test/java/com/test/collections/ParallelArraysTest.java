@@ -57,7 +57,7 @@ public class ParallelArraysTest {
         Assert.assertEquals(1, threads.size());
 
         // sort 10k elements and it should be executed in parallel
-        Double[] bigArray = DataGenerator.randomDoubles(10 * 1000).toArray(new Double[]{});
+        Double[] bigArray = DataGenerator.randomDoubles(100 * 1000).toArray(new Double[]{});
         threads.clear();
         Arrays.parallelSort(
                 bigArray, (o1, o2) -> {
