@@ -21,6 +21,12 @@ public abstract class LoggingTimedTest {
 
     @Before
     public void before() {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            // pass
+        }
+
         stopwatch = Stopwatch.createStarted();
         System.out.printf("\n>>> Starting test %s <<<\n", testName.getMethodName());
         System.out.println("--------------------------------");

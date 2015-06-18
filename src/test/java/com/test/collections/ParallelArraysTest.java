@@ -3,6 +3,7 @@ package com.test.collections;
 import com.google.common.collect.Sets;
 import com.test.concurrency.ForkJoinTest;
 import com.test.generators.DataGenerator;
+import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import java.util.Set;
  * Date: 14. 05. 2015
  * Time: 20.39
  */
-public class ParallelArraysTest {
+public class ParallelArraysTest extends LoggingTimedTest {
 
     /**
      * Test shows new parallel operations on arrays.

@@ -1,6 +1,7 @@
 package com.test.generators;
 
 import com.google.common.base.Preconditions;
+import com.test.beans.Gender;
 import com.test.beans.Person;
 import com.test.flatmap.Many;
 import com.test.flatmap.One;
@@ -68,7 +69,7 @@ public class DataGenerator {
             // generate people
             List<Person> people = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                //people.add(new Person(names.get(i), Math.random() > 0.5 ? Gender.MALE : Gender.FEMALE, (int)(Math.random() * 100)));
+                people.add(new Person(names.get(i), Math.random() > 0.5 ? Gender.MALE : Gender.FEMALE, (int)(Math.random() * 100)));
             }
             return people;
         } catch (URISyntaxException | IOException e) {

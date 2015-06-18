@@ -111,7 +111,7 @@ public class ReduceTest extends LoggingTimedTest {
                     adder.increment();
                     return integer1 + integer2;
                 });
-        System.out.printf("Combiner executed %d times.", adder.intValue());
+        System.out.printf("Combiner executed %d times.\n", adder.intValue());
 
         // assert
         Assert.assertTrue(adder.intValue() > 0);
