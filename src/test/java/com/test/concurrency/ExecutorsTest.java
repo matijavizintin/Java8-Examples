@@ -1,9 +1,13 @@
 package com.test.concurrency;
 
+import com.google.common.collect.ImmutableList;
 import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -139,5 +143,34 @@ public class ExecutorsTest extends LoggingTimedTest {
 
         // value can't be retrieved because the executor was terminated previously
         Assert.assertTrue(false);
+    }
+
+    /**
+     * This test show how can multiple jobs can be submitted at once. InvokeAll starts all tasks and returns a list of future that are used as hooks
+     * to execution result.
+     */
+    private Set<Long> usedThreads = new HashSet<>();
+    @Test
+    public void invokeAll() throws InterruptedException {
+        ExecutorService service = Executors.newCachedThreadPool();
+
+        // crate callable
+        usedThreads.clear();
+        Callable<Long> future = () -> {
+            usedThreads.add(Thread.currentThread().getId());
+            System.out.println(Thread.currentThread().getName());
+            return Thread.currentThread().getId();
+        };
+
+        // batch execute 4 tasks
+        List<Future<Long>> hooks = service.invokeAll(ImmutableList.of(future, future, future, future));
+
+        // use invoke all response as stream
+        long tasksExecuted = hooks.stream().count();
+        Assert.assertEquals(4, tasksExecuted);
+
+        // assert no of threads used
+        Assert.assertEquals(4, usedThreads.size());
+        service.shutdown();
     }
 }

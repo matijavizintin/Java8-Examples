@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 
+import java.time.Clock;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,7 +29,7 @@ public abstract class LoggingTimedTest {
         }
 
         stopwatch = Stopwatch.createStarted();
-        System.out.printf("\n>>> Starting test %s <<<\n", testName.getMethodName());
+        System.out.printf("\n%s >>> Starting test %s <<<\n", Clock.systemUTC().instant(), testName.getMethodName());
         System.out.println("--------------------------------");
     }
 
@@ -36,6 +37,6 @@ public abstract class LoggingTimedTest {
     public void after() {
         long execution = stopwatch.stop().elapsed(TimeUnit.MILLISECONDS);
         System.out.println("--------------------------------");
-        System.out.printf(">>> Test %s finished. Execution took %d milliseconds <<<\n", testName.getMethodName(), execution);
+        System.out.printf("%s >>> Test %s finished. Execution took %d milliseconds <<<\n", Clock.systemUTC().instant(), testName.getMethodName(), execution);
     }
 }
