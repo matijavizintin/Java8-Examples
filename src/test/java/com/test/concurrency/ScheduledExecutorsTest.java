@@ -65,6 +65,7 @@ public class ScheduledExecutorsTest extends LoggingTimedTest {
             executionCounter++;
         };
 
+        // ******** FIXED RATE *************
         // schedule repetitive task at fixed rate every 2 seconds with duration 1 seconds
         executionCounter = 0;
         long period = 2000;
@@ -79,6 +80,7 @@ public class ScheduledExecutorsTest extends LoggingTimedTest {
         // assert that there were 5 tasks executed (5 * 2 second delay <= 10 seconds)
         Assert.assertEquals(5, executionCounter);
 
+        // ******** FIXED DELAY *************
         // crate new scheduler service
         scheduledService = Executors.newScheduledThreadPool(ForkJoinTest.NO_OF_VCORES);
 
@@ -94,5 +96,47 @@ public class ScheduledExecutorsTest extends LoggingTimedTest {
 
         // assert that there were 3 tasks executed (3 * (2 second delay + 1 second execution) <= 10 seconds)
         Assert.assertEquals(3, executionCounter);
+    }
+
+    /**
+     * This tests shows that only one executor runs at a time no matter how many threads we have in the pool. If we have an scheduled executor every
+     * 1 second and a task takes 2 seconds then the next executor is started after the first terminates, so no concurrent execution.
+     */
+    @Test
+    public void oneExecutionThreadAtTime() throws InterruptedException {
+        ScheduledExecutorService scheduledService = Executors.newScheduledThreadPool(ForkJoinTest.NO_OF_VCORES);
+
+        // runnable
+        Runnable runnable = () -> {
+            System.out.printf(
+                    "%s Executing scheduled task on thread %s. Exec count [%d]\n", Clock.systemUTC().instant(), Thread.currentThread().getName(),
+                    executionCounter + 1);
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                System.out.printf("%s Interruption exception in thread %s.\n", Clock.systemUTC().instant(), Thread.currentThread().getName());
+                return;
+            }
+            System.out.printf(
+                    "%s Scheduled task finished on thread %s. Exec count[%d]\n", Clock.systemUTC().instant(), Thread.currentThread().getName(),
+                    executionCounter + 1);
+            executionCounter++;
+        };
+
+        // ******** FIXED RATE *************
+        // schedule repetitive task at fixed rate every 1 seconds with duration 2 seconds
+        executionCounter = 0;
+        long period = 1000;
+        System.out.println("Starting scheduler at fixed rate.");
+        scheduledService.scheduleAtFixedRate(runnable, 10, period, TimeUnit.MILLISECONDS);
+
+        // run scheduler for 10 seconds
+        TimeUnit.SECONDS.sleep(10);
+        scheduledService.shutdownNow();
+        System.out.println("Scheduler at fixed rate competed.\n");
+
+        // assert that there were 5 tasks executed because of serial execution (1s delay + 4 * 2 seconds per task <= 10 seconds)
+        // NOTE: if tasks were executed concurrently then there will be 10 executions
+        Assert.assertEquals(4, executionCounter);
     }
 }
