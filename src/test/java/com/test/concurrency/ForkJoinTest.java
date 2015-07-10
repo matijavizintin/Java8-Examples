@@ -12,7 +12,7 @@ import java.util.concurrent.ForkJoinPool;
  * Time: 13.57
  */
 public class ForkJoinTest extends LoggingTimedTest {
-    public static final int NO_OF_VCORES = 8;          // i7-4980HQ
+    public static final int NO_OF_VCORES = Runtime.getRuntime().availableProcessors();
 
     /**
      * Simple test of ForkJoinPool

@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -68,8 +69,9 @@ public class DataGenerator {
 
             // generate people
             List<Person> people = new ArrayList<>();
+            Random random = new Random();
             for (int i = 0; i < size; i++) {
-                people.add(new Person(names.get(i), Math.random() > 0.5 ? Gender.MALE : Gender.FEMALE, (int)(Math.random() * 100)));
+                people.add(new Person(names.get(i), Math.random() > 0.5 ? Gender.MALE : Gender.FEMALE, random.nextInt() * 100));
             }
             return people;
         } catch (URISyntaxException | IOException e) {

@@ -45,6 +45,7 @@ public class AnnotationsTest extends LoggingTimedTest {
     public void typeAnnotations() {
         // annotation in new instance
         @TypeUseAnnotation AnnotatedClass<String> clazz = new @TypeUseAnnotation AnnotatedClass<>();
+        @TypeUseAnnotation String value = clazz.value;
 
         // annotated type parameter
         List<@TypeUseAnnotation String> emptyList = new ArrayList<>();

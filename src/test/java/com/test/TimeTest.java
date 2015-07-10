@@ -96,7 +96,7 @@ public class TimeTest extends LoggingTimedTest {
         LocalTime localTime3 = LocalTime.parse("11:11", dateTimeFormatter);
         Assert.assertEquals(LocalTime.of(11, 11), localTime3);
 
-        // local time in immutable
+        // local time is immutable
         LocalTime now = LocalTime.now();
         LocalTime advanced = now.plus(1, ChronoUnit.HOURS);
         long difference2 = ChronoUnit.HOURS.between(now, advanced);
