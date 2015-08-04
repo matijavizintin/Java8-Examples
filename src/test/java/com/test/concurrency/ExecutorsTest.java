@@ -5,6 +5,7 @@ import com.test.timed.LoggingTimedTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.Clock;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -158,7 +159,8 @@ public class ExecutorsTest extends LoggingTimedTest {
         usedThreads.clear();
         Callable<Long> future = () -> {
             usedThreads.add(Thread.currentThread().getId());
-            System.out.println(Thread.currentThread().getName());
+            System.out.printf("%s %s\n", Clock.systemUTC().instant(), Thread.currentThread().getName());
+            TimeUnit.SECONDS.sleep(1);      // sleep 1 second
             return Thread.currentThread().getId();
         };
 

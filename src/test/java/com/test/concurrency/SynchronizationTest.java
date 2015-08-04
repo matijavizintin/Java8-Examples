@@ -162,18 +162,19 @@ public class SynchronizationTest extends LoggingTimedTest {
         });
 
         // write lock
+        TimeUnit.MICROSECONDS.sleep(10);
         service.submit(() -> {
-            long stamp = lock.writeLock();
-            System.out.printf("%s Write lock acquired\n", Clock.systemUTC().instant());
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (Exception e) {
-                // pass
-            } finally {
-                lock.unlock(stamp);
-                System.out.printf("%s Write lock released\n", Clock.systemUTC().instant());
-            }
-        });
+                    long stamp = lock.writeLock();
+                    System.out.printf("%s Write lock acquired\n", Clock.systemUTC().instant());
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (Exception e) {
+                        // pass
+                    } finally {
+                        lock.unlock(stamp);
+                        System.out.printf("%s Write lock released\n", Clock.systemUTC().instant());
+                    }
+                });
 
         // shutdown
         service.awaitTermination(2050, TimeUnit.MILLISECONDS);
