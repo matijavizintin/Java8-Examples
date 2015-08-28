@@ -223,4 +223,18 @@ public class StreamsTest extends LoggingTimedTest {
 
         Assert.assertTrue("This line of code shouldn't have been executed.", false);
     }
+
+    /**
+     * This test shows how to use streams on the string object.
+     */
+    @Test
+    public void string() {
+        String result = "foobar"
+                .chars()            // creates an int stream
+                .distinct()         // pick only distinct chars
+                .mapToObj(value -> String.valueOf((char)value))     // map to string
+                .sorted()           // sort in alphabetic order
+                .collect(Collectors.joining());     // join to a string
+        Assert.assertEquals("abfor", result);
+    }
 }

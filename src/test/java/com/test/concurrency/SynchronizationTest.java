@@ -272,7 +272,6 @@ public class SynchronizationTest extends LoggingTimedTest {
             } catch (InterruptedException e) {
                 System.out.printf("%s Failed while acquiring semaphore access.\n", Clock.systemUTC().instant());
             }
-
         };
 
         // execute 5 tasks (we have a pool of 5 threads)
