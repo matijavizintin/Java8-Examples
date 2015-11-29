@@ -25,4 +25,16 @@ public class ForkJoinTest extends LoggingTimedTest {
 
         Assert.assertEquals(NO_OF_VCORES - 1, pool.getParallelism());            // expected: no of (virtual) cores - 1
     }
+
+    /**
+     * This method returns the same result as the upper one, except here the result is read from a variable and not
+     * from the pool instance.
+     */
+    @Test
+    public void getParallelism() {
+        int parallelism = ForkJoinPool.getCommonPoolParallelism();
+        System.out.println("Common parallelism: " + parallelism);
+
+        Assert.assertEquals(NO_OF_VCORES - 1, parallelism);
+    }
 }

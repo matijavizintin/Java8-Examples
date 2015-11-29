@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -103,6 +104,24 @@ public class DataGenerator {
         }
     }
 
+    public static ConcurrentHashMap<String, String> concurrentMap() {
+        try {
+            // read names in resources
+            Path path = new File(DataGenerator.class.getClassLoader().getResource("names.txt").toURI()).toPath();
+            List<String> names = Files.readAllLines(path);
+
+            // generate map
+            ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>(names.size());
+            for (String name : names) {
+                map.put(name, revert(name));
+            }
+            return map;
+        } catch (URISyntaxException | IOException e) {
+            logger.error("Can't read names from file.", e);
+            throw new RuntimeException("Check logs.");
+        }
+    }
+
     public static void main(String[] args) {
         URL url = DataGenerator.class.getClassLoader().getResource("names.txt");
         Preconditions.checkNotNull(url);
@@ -116,5 +135,14 @@ public class DataGenerator {
         } catch (IOException e) {
             // pass
         }
+    }
+
+    public static String revert(String input) {
+        char[] array = input.toCharArray();
+        StringBuilder sb = new StringBuilder(array.length);
+        for (int i = array.length - 1; i >= 0; i--) {
+            sb.append(array[i]);
+        }
+        return new String(sb);
     }
 }
