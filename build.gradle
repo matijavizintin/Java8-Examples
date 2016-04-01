@@ -1,0 +1,19 @@
+group 'com.test'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+    compile "com.google.guava:guava:18.0"
+    compile "org.apache.commons:commons-lang3:3.3.2"
+    compile "log4j:log4j:1.2.17"
+}

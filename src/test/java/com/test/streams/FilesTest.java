@@ -56,7 +56,7 @@ public class FilesTest extends LoggingTimedTest {
         }
 
         // read file
-        try (Stream<String> stream = Files.lines(Paths.get("pom.xml"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("build.gradle"))) {
             System.out.println("Reading from pom files lines that don't start with '<'");
             stream.map(String::trim).filter(s -> !s.isEmpty() && !s.startsWith("<")).forEach(System.out::println);
         }
